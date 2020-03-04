@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { moviesData } from "./components/data";
+import Search from "./components/Search";
+import MovieList from "./components/MovieList";
+import AddMovie from "./components/addMovie";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+class App extends React.Component {
+  state = {
+    moviesData: moviesData,
+    nameFilter: "",
+    minRating: 1
+  };
+  AddMovie = newMovie => {
+    this.setState({
+      moviesData: [...this.state.moviesData, newMovie]
+    });
+  };
+
+  SearchMovie = x => {
+    this.setState({
+      nameFilter: x
+    });
+  };
+
+  searchByRating = x => {
+    this.setState({
+      minRating: x
+    });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <Search
+          SearchMovie={this.SearchMovie}
+          searchByRating={this.searchByRating}
+        />
+        <MovieList
+          movies={this.state.moviesData}
+          nameFilter={this.state.nameFilter}
+          minRating={this.state.minRating}
+        />
+
+        <AddMovie AddMovie={this.AddMovie} />
+      </div>
+    );
+  }
 }
 
 export default App;
