@@ -1,6 +1,7 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 import Rate from "./Rate";
+import WithLoading from "./WithLoading";
 
 const MovieList = props => {
   return (
@@ -27,4 +28,4 @@ const MovieList = props => {
     </div>
   );
 };
-export default MovieList;
+export default WithLoading(MovieList);
